@@ -40,7 +40,12 @@ var app = new Vue({
         value: web3.toWei(ref.initAmount),
         gas: 4000000
       }, function (err, result) {
-        if (err) throw err
+        if (err) {
+          console.error(err)
+          ref.txData = err.toString()
+
+          return
+        }
 
         ref.txData = result
       })
