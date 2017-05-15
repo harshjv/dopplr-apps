@@ -32,7 +32,8 @@ var app = new Vue({
     myBalance: 0,
     otherBalance: 0,
     txData: null,
-    channelClosed: false
+    channelClosed: false,
+    closeTransactionHash: null
   },
   methods: {
     initStart: function () {

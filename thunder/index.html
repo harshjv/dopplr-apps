@@ -64,7 +64,7 @@
               <button type="button" v-on:click="initStart" class="btn btn-default">Start 🚀</button>
             </form>
           </div>
-          <div class="panel-body">
+          <div class="panel-body" v-if="txData">
             <form>
               <div class="form-group">
                 <label>Transaction Data</label>
@@ -76,7 +76,7 @@
       </div>
       <div v-else>
         <div class="alert alert-success" v-if="channelClosed">
-          <strong>Oho!</strong> This channel has been closed. Thank you for using <strong>⚡️ Thunder</strong>
+          <strong>Oho!</strong> This channel has been closed. The transaction hash of settlement is <code>{{ closeTransactionHash }}</code>. Thank you for using <strong>⚡️ Thunder</strong>
         </div>
         <div class="alert alert-success" v-else>
           <strong>Cool!</strong> We've got you covered with <strong>⚡️ Thunder</strong>
