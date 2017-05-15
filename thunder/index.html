@@ -75,11 +75,14 @@
         </div>
       </div>
       <div v-else>
-        <div class="alert alert-success">
+        <div class="alert alert-success" v-if="channelClosed">
+          <strong>Oho!</strong> This channel has been closed. Thank you for using <strong>⚡️ Thunder</strong>
+        </div>
+        <div class="alert alert-success" v-else>
           <strong>Cool!</strong> We've got you covered with <strong>⚡️ Thunder</strong>
         </div>
 
-        <div class="panel panel-default">
+        <div class="panel panel-default" v-if="!channelClosed">
           <div class="panel-heading">
             Actions <code class="pull-right">Nonce &lt;{{ nonce }}&gt;</code>
           </div>
