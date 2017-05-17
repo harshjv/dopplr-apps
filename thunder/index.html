@@ -42,12 +42,18 @@
     </nav>
     <div class="container" id="app">
       <div v-if="watching">
-        <div class="alert alert-info">
-          <strong>Watching!</strong> Watching your involvement with <strong>⚡️ Thunder</strong>
+        <div class="alert alert-info" v-if="!txData">
+          <strong>Heads up!</strong> Watching your involvement with <strong>⚡️ Thunder</strong>
+        </div>
+        <div class="alert alert-success" v-else>
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+          </div>
+          <strong>Cool!</strong> Waiting for the transaction <code>{{ txData }}</code> to be mined
         </div>
         <div class="panel panel-default">
           <div class="panel-heading">Initiate</div>
-          <div class="panel-body">
+          <div class="panel-body" v-if="!txData">
             <form>
               <div class="form-group">
                 <label>From Ethereum Address</label>
@@ -64,10 +70,10 @@
               <button type="button" v-on:click="initStart" class="btn btn-default">Start 🚀</button>
             </form>
           </div>
-          <div class="panel-body" v-if="txData">
+          <div class="panel-body" v-else>
             <form>
               <div class="form-group">
-                <label>Transaction Data</label>
+                <label>Transaction Hash</label>
                 <input class="form-control" readonly="" v-model="txData"></textarea>
               </div>
             </form>
