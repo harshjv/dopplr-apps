@@ -26,6 +26,34 @@
     ga('create', 'UA-98565459-2', 'auto');
     ga('send', 'pageview');
     </script>
+
+    <script>
+    function web3Ready (web3) {
+      web3.eth.getAccounts(function (err, accounts) {
+        if (err) console.error(err)
+        else {
+          $('#from_eth_address').val(accounts[0])
+        }
+      })
+
+      $('#go').click(function () {
+        var message = $('#message').val().trim()
+        var ref = $('#signed_data')
+        message = message.trim()
+
+        ref.val('Signing...')
+
+        web3.eth.sign($('#from_eth_address').val(), web3.sha3(message), (err, result) => {
+          if (err) {
+            console.error(err)
+            ref.val(err.toString())
+          } else {
+            $('#signed_data').val(result)
+          }
+        })
+      })
+    }
+    </script>
   </head>
   <body>
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -64,32 +92,6 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="https://dopplr.io/web3.js"></script>
-
-    <script>
-    web3.eth.getAccounts(function (err, accounts) {
-      if (err) console.error(err)
-      else {
-        $('#from_eth_address').val(accounts[0])
-      }
-    })
-
-    $('#go').click(function () {
-      var message = $('#message').val().trim()
-      var ref = $('#signed_data')
-      message = message.trim()
-
-      ref.val('Signing...')
-
-      web3.eth.sign($('#from_eth_address').val(), web3.sha3(message), (err, result) => {
-        if (err) {
-          console.error(err)
-          ref.val(err.toString())
-        } else {
-          $('#signed_data').val(result)
-        }
-      })
-    })
-    </script>
+    <script src="https://dopplr.io/web3.js?v=12312qdasdasds"></script>
   </body>
 </html>

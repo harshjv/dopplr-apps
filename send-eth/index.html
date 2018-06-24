@@ -26,6 +26,54 @@
     ga('create', 'UA-98565459-2', 'auto');
     ga('send', 'pageview');
     </script>
+
+    <script>
+    function web3Ready (web3) {
+      web3.eth.getAccounts(function (err, accounts) {
+        if (err) console.error(err)
+        else {
+          $('#from_eth_address').val(accounts[0])
+        }
+      })
+
+      $('#go').click(function () {
+        var from = $('#from_eth_address').val().trim()
+        var to = $('#to_eth_address').val().trim()
+        var amount = $('#amount').val().trim()
+        var ref = $('#transaction')
+
+        from = from.trim()
+        to = to.trim()
+
+        if (!web3.isAddress(from)) {
+          ref.val('Incorrect From Ethereum address')
+
+          return
+        }
+
+        if (!web3.isAddress(to)) {
+          ref.val('Incorrect To Ethereum address')
+
+          return
+        }
+
+        ref.val('Sending...')
+
+        web3.eth.sendTransaction({
+          from: from,
+          to: to,
+          value: web3.toWei(amount),
+          gas: 1000000
+        }, function(err, hash) {
+          if (err) {
+            ref.val(err.message)
+          } else {
+            ref.val(hash)
+          }
+        })
+      })
+    }
+    </script>
   </head>
   <body>
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -69,51 +117,5 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://dopplr.io/web3.js"></script>
-
-    <script>
-    web3.eth.getAccounts(function (err, accounts) {
-      if (err) console.error(err)
-      else {
-        $('#from_eth_address').val(accounts[0])
-      }
-    })
-
-    $('#go').click(function () {
-      var from = $('#from_eth_address').val().trim()
-      var to = $('#to_eth_address').val().trim()
-      var amount = $('#amount').val().trim()
-      var ref = $('#transaction')
-
-      from = from.trim()
-      to = to.trim()
-
-      if (!web3.isAddress(from)) {
-        ref.val('Incorrect From Ethereum address')
-
-        return
-      }
-
-      if (!web3.isAddress(to)) {
-        ref.val('Incorrect To Ethereum address')
-
-        return
-      }
-
-      ref.val('Sending...')
-
-      web3.eth.sendTransaction({
-        from: from,
-        to: to,
-        value: web3.toWei(amount),
-        gas: 1000000
-      }, function(err, hash) {
-        if (err) {
-          ref.val(err.message)
-        } else {
-          ref.val(hash)
-        }
-      })
-    })
-    </script>
   </body>
 </html>

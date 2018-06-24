@@ -1,0 +1,23 @@
+{
+  "name": "dopplr.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server -p $PORT",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dopplr/dopplr.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dopplr/dopplr.github.io/issues"
+  },
+  "homepage": "https://github.com/dopplr/dopplr.github.io#readme",
+  "dependencies": {
+    "http-server": "^0.11.1"
+  }
+}
